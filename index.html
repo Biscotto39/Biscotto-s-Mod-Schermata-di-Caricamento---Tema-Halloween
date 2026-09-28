@@ -27,6 +27,13 @@
             font-style: normal;
         }
 
+        @font-face {
+            font-family: "Hell-A-Ween";
+            src: url("Hell-A-Ween-Regular.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -41,7 +48,7 @@
         }
 
         body {
-            background: #f06e11;
+            background: #000000;
 
             font-family:
                 "Coolvetica Book",
@@ -55,21 +62,6 @@
             align-items: center;
 
             position: relative;
-        }
-
-        /* ============================== */
-        /* IMMAGINE RAGNATELE (SCHERMO INTERO) */
-        /* ============================== */
-
-        .ragnatele-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            pointer-events: none; /* Permette i clic sottostanti se necessario */
-            z-index: 998; /* Sopra i livelli di gioco, ma sotto la pubblicità (che è a 9999) */
         }
 
         /* ============================== */
@@ -114,15 +106,17 @@
             position: relative;
             z-index: 2;
 
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
 
-            transform:
-                translateY(-40px);
+            transform: translateY(-20px);
         }
 
         .logo {
-            width: 220px;
-            height: 220px;
+            width: 210px;
+            height: 210px;
 
             object-fit: contain;
 
@@ -134,7 +128,7 @@
             filter:
                 drop-shadow(
                     0 12px 18px
-                    rgba(0, 0, 0, 0.18)
+                    rgba(0, 0, 0, 0.5)
                 );
         }
 
@@ -152,32 +146,50 @@
 
         }
 
-        .title {
-            margin-top: 25px;
+        .text-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
+        .title {
             font-family:
+                "Hell-A-Ween",
                 "Coolvetica",
                 Arial,
                 sans-serif;
 
-            font-size: 58px;
+            font-size: 64px;
             font-weight: normal;
 
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            color: #ff6a00;
 
             text-shadow:
-                0 4px 12px
-                rgba(0, 0, 0, 0.18);
+                0 0 20px
+                rgba(255, 106, 0, 0.4);
+        }
+
+        .subtitle-top {
+            font-family:
+                "Hell-A-Ween",
+                "Coolvetica",
+                Arial,
+                sans-serif;
+            font-size: 32px;
+            letter-spacing: 2px;
+            color: #ff8833;
+            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         .random-box {
-            width: 520px;
-
-            margin:
-                28px
-                auto
-                0
-                auto;
+            width: 100%;
+            max-width: 520px;
+            margin-top: 18px;
+            text-align: center;
         }
 
         .random-line {
@@ -189,16 +201,16 @@
                     255,
                     255,
                     255,
-                    0.30
+                    0.20
                 );
         }
 
         .random-text {
-            margin-top: 14px;
+            margin-top: 10px;
 
             min-height: 24px;
 
-            font-size: 18px;
+            font-size: 16px;
 
             letter-spacing:
                 0.5px;
@@ -208,7 +220,7 @@
                     255,
                     255,
                     255,
-                    0.92
+                    0.85
                 );
 
             opacity: 1;
@@ -321,7 +333,7 @@
             height: 100%;
 
             background:
-                white;
+                #ff6a00;
 
             border-radius: 0;
 
@@ -419,7 +431,6 @@
             z-index: 2;
         }
 
-        /* FINTO TASTO PUBBLICITÀ */
         .skip-ad-btn {
             position: absolute;
             bottom: 20px;
@@ -439,13 +450,27 @@
 
         @media (max-width: 768px) {
 
+            .main {
+                flex-direction: column;
+                gap: 20px;
+            }
+
             .logo {
-                width: 160px;
-                height: 160px;
+                width: 150px;
+                height: 150px;
+            }
+
+            .text-container {
+                text-align: center;
+                align-items: center;
             }
 
             .title {
                 font-size: 42px;
+            }
+
+            .subtitle-top {
+                font-size: 22px;
             }
 
             .random-box {
@@ -483,9 +508,6 @@
 
 
 <body>
-
-    <!-- Immagine ragnatele a schermo intero sopra i livelli, ma sotto la pubblicità -->
-    <img src="ragnatele.png" alt="Ragnatele" class="ragnatele-overlay">
 
     <div id="adBackdrop" class="ad-backdrop" style="display: none;">
         <div class="ad-modal">
@@ -525,24 +547,18 @@
             class="logo"
         >
 
-        <div class="title">
-            Biscotto's Mod
-        </div>
-
-
-        <div class="random-box">
-
-            <div
-                class="random-line"
-            ></div>
-
-            <div
-                class="random-text"
-                id="randomText"
-            >
-                Preparando i biscotti...
+        <div class="text-container">
+            <div class="subtitle-top">Biscotto's</div>
+            <div class="title">
+                HALLOWEEN
             </div>
 
+            <div class="random-box">
+                <div class="random-line"></div>
+                <div class="random-text" id="randomText">
+                    Preparando i biscotti...
+                </div>
+            </div>
         </div>
 
     </div>
@@ -583,10 +599,6 @@
 
     <script>
 
-        /* ========================================= */
-        /* CONFIGURAZIONE PUBBLICITÀ WEBM            */
-        /* ========================================= */
-
         const adVideos = [
             "parkside.webm",
             "eurospin.webm",
@@ -598,12 +610,8 @@
             "arredissima.webm"
         ];
 
-        // Probabilità di comparsa della pubblicità (0.7 = 70%)
         const CHANCE_OF_AD = 0.1;
-
-        // Ritardo (in ms) prima di tentare l'avvio della pubblicità
         const AD_DELAY_MS = 1500;
-
 
         const adBackdrop = document.getElementById("adBackdrop");
         const adVideo = document.getElementById("adVideo");
@@ -687,7 +695,6 @@
 
 
         function closeAd() {
-            // Rimuove gli eventi per evitare loop
             adVideo.oncanplay = null;
             adVideo.onplaying = null;
             adVideo.onerror = null;
@@ -696,7 +703,6 @@
             adVideo.src = "";
             adBackdrop.style.display = "none";
 
-            // Riprende la musica di sottofondo o ne avvia una nuova
             if (backgroundMusic.paused) {
                 if (!backgroundMusic.src) {
                     playRandomSong();
@@ -707,17 +713,9 @@
         }
 
 
-        // Chiude la finestra automaticamente al termine del video
         adVideo.addEventListener("ended", closeAd);
-
-
-        // Tenta di avviare la pubblicità dopo il delay impostato
         setTimeout(tryShowRandomAd, AD_DELAY_MS);
 
-
-        /* ========================================= */
-        /* MUSICA & PLAYLIST CASUALE (SHUFFLE POOL)  */
-        /* ========================================= */
 
         const backgroundMusic =
             document.getElementById(
@@ -753,12 +751,10 @@
         ];
 
         const MAX_LOADING_MUSIC_VOLUME = 0.35;
-
         backgroundMusic.volume = 0;
 
 
         function applyGameVolume(volume) {
-
             let gameVolume = Number(volume);
 
             if (!Number.isFinite(gameVolume)) {
@@ -785,7 +781,6 @@
             ) {
                 backgroundMusic.play().catch(() => {});
             }
-
         }
 
 
@@ -817,13 +812,11 @@
 
 
         function playRandomSong() {
-
             if (playlist.length === 0) return;
 
             nowPlayingText.classList.add("hidden");
 
             setTimeout(() => {
-
                 let remaining = getRemainingSongs();
 
                 if (remaining.length === 0) {
@@ -856,11 +849,8 @@
                 } catch (e) {}
 
                 nowPlayingText.textContent = cleanName;
-
                 nowPlayingText.classList.remove("hidden");
-
             }, 350);
-
         }
 
 
@@ -868,7 +858,6 @@
             "ended",
             playRandomSong
         );
-
 
         playRandomSong();
 
@@ -901,125 +890,74 @@
         );
 
 
-        /* ========================================= */
-        /* MESSAGGI CASUALI                          */
-        /* ========================================= */
-
         const randomMessages = [
-
             "Preparando i biscotti...",
-
             "Il Biscotto sta girando perfettamente...",
-
             "Inseguendo gli HeroGrey...",
-
             "ATTENZIONE: Hero è Gay, state lontano tende a toccare...",
-
             "Biscotto is watching you...",
-
             "Bun, Bun...",
-
             "EvilMarco ti guarda sempre, ricordalo...",
-
             "Sto cercando la torta...",
-
             "Teabaggando il killer...",
-
             "Premi ALT + F4 per un achievement segreto...",
-
             "Divertiti con gli amici belli...",
-
             "Passando per il Covo Massi...",
-
             "MAAASSSIIII MI PORRRTTII ALL MCCC...",
-
             "GG Bun, GG..."
-
         ];
-
 
         const randomText =
             document.getElementById(
                 "randomText"
             );
 
-
         let lastMessage = -1;
 
-
         function changeRandomMessage() {
-
             randomText
                 .classList
                 .add("hidden");
 
-
             setTimeout(() => {
-
                 let next;
-
                 do {
-
                     next =
                         Math.floor(
                             Math.random() *
                             randomMessages.length
                         );
-
                 }
-
                 while (
                     next === lastMessage &&
                     randomMessages.length > 1
                 );
 
-
-                lastMessage =
-                    next;
-
-
-                randomText.textContent =
-                    randomMessages[next];
-
+                lastMessage = next;
+                randomText.textContent = randomMessages[next];
 
                 randomText
                     .classList
                     .remove("hidden");
-
             }, 350);
-
         }
 
+        changeRandomMessage();
+        setInterval(changeRandomMessage, 3000);
 
-changeRandomMessage();
-
-
-        setInterval(
-            changeRandomMessage,
-            3000
-        );
-
-
-        /* ========================================= */
-        /* CARICAMENTO GARRY'S MOD                   */
-        /* ========================================= */
 
         let totalFiles = 0;
-
         let filesNeeded = 0;
-
 
         const loadingBar =
             document.getElementById(
                 "loadingBar"
             );
 
-
         const statusElement =
             document.getElementById(
                 "status"
             );
-
 
         const percent =
             document.getElementById(
@@ -1037,22 +975,17 @@ changeRandomMessage();
             volume,
             language
         ) {
-
             statusElement.textContent =
                 "Caricamento mappa: " +
                 mapname;
 
-
             applyGameVolume(volume);
-
         }
 
 
         function SetFilesTotal(total) {
-
             totalFiles =
                 Number(total) || 0;
-
 
             loadingBar
                 .classList
@@ -1060,73 +993,56 @@ changeRandomMessage();
                     "waiting"
                 );
 
-
             updateProgress();
-
         }
 
 
         function SetFilesNeeded(needed) {
-
             filesNeeded =
                 Number(needed) || 0;
 
-
             updateProgress();
-
         }
 
 
         function DownloadingFile(
             fileName
         ) {
-
             statusElement.textContent =
                 "Download: " +
                 fileName;
-
         }
 
 
         function SetStatusChanged(
             currentStatus
         ) {
-
             if (
                 currentStatus &&
                 currentStatus.length > 0
             ) {
-
                 statusElement.textContent =
                     currentStatus;
-
             }
-
         }
 
 
         function updateProgress() {
-
             if (
                 totalFiles <= 0
             ) {
-
                 return;
-
             }
-
 
             const downloaded =
                 totalFiles -
                 filesNeeded;
-
 
             let progress =
                 (
                     downloaded /
                     totalFiles
                 ) * 100;
-
 
             progress =
                 Math.max(
@@ -1137,18 +1053,15 @@ changeRandomMessage();
                     )
                 );
 
-
             loadingBar.style.width =
                 progress +
                 "%";
-
 
             percent.textContent =
                 Math.floor(
                     progress
                 ) +
                 "%";
-
         }
 
     </script>
